@@ -1,0 +1,15 @@
+stages:
+  - test
+
+image: docker:latest
+
+services:
+  - docker:dind
+
+before_script:
+  - docker build -t kousik828/Docker-React-New -f Dockerfile.dev .
+
+test:
+  stage: test
+  script:
+    - docker run -e CI=true kousik828/Docker-React-New npm run test
